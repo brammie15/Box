@@ -1,6 +1,8 @@
 #include <graphx.h>
 #include <keypadc.h>
+#include <math.h>
 #include <tice.h>
+
 struct Vector2 {
     int x;
     int y;
@@ -9,6 +11,12 @@ class Object {
    public:
     Vector2 pos;
 };
+
+// we store whether the key was previously pressed down. you'll see what we do with this.
+bool previousUp = false;
+bool previousDown = false;
+bool previousLeft = false;
+bool previousRight = false;
 
 uint8_t get_single_key_pressed(void) {
     static uint8_t last_key;
@@ -33,10 +41,19 @@ uint8_t get_single_key_pressed(void) {
     return only_key;
 }
 
-void movePlayer(int8_t x, int8_t y, Object &p, uint8_t board[5][5]) {
+#define BOARD_SIZE 5
+
+void movePlayer(int16_t x, int16_t y, Object &p, uint8_t board[5][5]) {
     board[p.pos.x][p.pos.y] = 0;
     p.pos.x += x;
     p.pos.y += y;
+
+    // clamp the player's position, so that they don't fall off the board
+    p.pos.x = (p.pos.x > BOARD_SIZE - 1) ? (BOARD_SIZE - 1) : p.pos.x;
+    p.pos.y = (p.pos.y > BOARD_SIZE - 1) ? (BOARD_SIZE - 1) : p.pos.y;
+    p.pos.x = (p.pos.x < 0) ? 0 : p.pos.x;
+    p.pos.y = (p.pos.y < 0) ? 0 : p.pos.y;
+
     board[p.pos.x][p.pos.y] = 1;
 }
 
@@ -57,43 +74,31 @@ int main(void) {
     do {
         kb_Scan();
 
-        key = kb_Data[7];
-
-        if (key & kb_Down) {
-            movePlayer(0, 1, player, board);
-        }
-        if (key & kb_Up) {
+        // after updating the keypad, we check if the keys are pressed and if they were pressed before
+        // if the key is pressed now *and* it was not pressed before, we move the player
+        // this is a messy way of doing this. Allegro's tutorials somewhere have a better solution.
+        if (kb_IsDown(kb_KeyUp) && !previousUp) {
             movePlayer(0, -1, player, board);
         }
-        if (key & kb_Left) {
+        if (kb_IsDown(kb_KeyDown) && !previousDown) {
+            movePlayer(0, 1, player, board);
+        }
+        if (kb_IsDown(kb_KeyLeft) && !previousLeft) {
             movePlayer(-1, 0, player, board);
         }
-        if (key & kb_Right) {
+        if (kb_IsDown(kb_KeyRight) && !previousRight) {
             movePlayer(1, 0, player, board);
         }
 
-        // switch (get) {
-        //     case kb_Down:
-        //         movePlayer(0, 1, player, board);
-        //         break;
-        //     case kb_Up:
-        //         movePlayer(0, -1, player, board);
-        //         break;
-        //     case kb_Right:
-        //         movePlayer(1, 0, player, board);
-        //         break;
-        //     case kb_Left:
-        //         movePlayer(-1, 0, player, board);
-        //         break;
-        //     default:
-        //         break;
-        // }
-        // prevKey = keyUp || keyDown || keyLeft || keyRight;
+        // finally, update the previousUp, previousDown, previousLeft, and previousRight variables.
+        previousUp = kb_IsDown(kb_KeyUp);
+        previousLeft = kb_IsDown(kb_KeyLeft);
+        previousRight = kb_IsDown(kb_KeyRight);
+        previousDown = kb_IsDown(kb_KeyDown);
 
         // Player = 1, box = 2 , wall = 3
 
         gfx_SetDrawBuffer();
-        // gfx_SwapDraw();
         // Rendering
         gfx_FillScreen(255);
         for (int x = 0; x < 5; x++) {
@@ -110,11 +115,12 @@ int main(void) {
                 }
             }
         }
+        //draw grid
         gfx_SetColor(gfx_black);
         for (uint16_t i = 0; i < SCREEN_HEIGHT; i += (SCREEN_HEIGHT / 5)) {
             gfx_HorizLine(40, i, SCREEN_WIDTH - 80);
         }
-        for (uint16_t i = 40; i < SCREEN_WIDTH; i += (SCREEN_WIDTH - 80) / YSIZE) {
+        for (uint16_t i = 40; i < SCREEN_WIDTH; i += (SCREEN_WIDTH - 80) / YSIZE) {  //starting at 40 for edges
             gfx_VertLine(i, 0, SCREEN_HEIGHT);
         }
         gfx_SwapDraw();

@@ -33,9 +33,9 @@ uint8_t get_single_key_pressed(void) {
     return only_key;
 }
 
-void movePlayer(uint8_t x, uint8_t y, Object &p, uint8_t board[5][5]) {
+void movePlayer(int8_t x, int8_t y, Object &p, uint8_t board[5][5]) {
     board[p.pos.x][p.pos.y] = 0;
-    p.pos.y += x;
+    p.pos.x += x;
     p.pos.y += y;
     board[p.pos.x][p.pos.y] = 1;
 }
@@ -72,7 +72,7 @@ int main(void) {
             movePlayer(1, 0, player, board);
         }
 
-        // switch () {
+        // switch (get) {
         //     case kb_Down:
         //         movePlayer(0, 1, player, board);
         //         break;

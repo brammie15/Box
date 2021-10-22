@@ -1,96 +1,27 @@
-#include <debug.h>
+//#include <debug.h>
 #include <graphx.h>
 #include <keypadc.h>
 #include <math.h>
 #include <tice.h>
 
-struct Vector2 {
-    int x;
-    int y;
-};
-class Object {
-   public:
-    Vector2 pos;
-};
-
+#include "box.h"
+#include "common.h"
+#include "player.h"
 // we store whether the key was previously pressed down. you'll see what we do with this.
 bool previousUp = false;
 bool previousDown = false;
 bool previousLeft = false;
 bool previousRight = false;
 
-uint8_t get_single_key_pressed(void) {
-    static uint8_t last_key;
-    uint8_t only_key = 0;
-    kb_Scan();
-    for (uint8_t key = 1, group = 7; group; --group) {
-        for (uint8_t mask = 1; mask; mask <<= 1, ++key) {
-            if (kb_Data[group] & mask) {
-                if (only_key) {
-                    last_key = 0;
-                    return 0;
-                } else {
-                    only_key = key;
-                }
-            }
-        }
-    }
-    if (only_key == last_key) {
-        return 0;
-    }
-    last_key = only_key;
-    return only_key;
-}
-
-#define BOARD_SIZE 5
-bool validPos(int8_t x, int8_t y) {
-    if (x > BOARD_SIZE || x < 0 || y > BOARD_SIZE || y < 0) {
-        return false;
-    } else {
+bool checkGoals(Object goal, Object box) {
+    if (goal.pos.x == box.pos.x && goal.pos.y == box.pos.y) {
         return true;
-    }
-}
-bool moveBox(int16_t x, int16_t y, Object &b, uint8_t board[5][5]) {
-    dbg_printf(dbgout, "x: %d, y: %d", x, y);
-    //if (validPos(b.pos.x + x, b.pos.y + y)) {
-    board[b.pos.x][b.pos.y] = 0;
-    b.pos.x + x;
-    b.pos.y + y;
-    board[b.pos.x][b.pos.y] = 2;
-    return true;
-    //} else {
-    //   return false;
-    //}
-}
-void movePlayer(int16_t x, int16_t y, Object &p, uint8_t board[5][5], Object &b) {
-    dbg_printf(dbgout, "x: %d, y: %d", x, y);
-    if (board[p.pos.x + x][p.pos.y + y] == 2) {  //box is in front
-        if (moveBox(x, y, b, board)) {
-            board[p.pos.x][p.pos.y] = 0;
-            p.pos.x += x;
-            p.pos.y += y;
-
-            // clamp the player's position, so that they don't fall off the board
-            p.pos.x = (p.pos.x > BOARD_SIZE - 1) ? (BOARD_SIZE - 1) : p.pos.x;
-            p.pos.y = (p.pos.y > BOARD_SIZE - 1) ? (BOARD_SIZE - 1) : p.pos.y;
-            p.pos.x = (p.pos.x < 0) ? 0 : p.pos.x;
-            p.pos.y = (p.pos.y < 0) ? 0 : p.pos.y;
-
-            board[p.pos.x][p.pos.y] = 1;
-        }
     } else {
-        board[p.pos.x][p.pos.y] = 0;
-        p.pos.x += x;
-        p.pos.y += y;
-
-        // clamp the player's position, so that they don't fall off the board
-        p.pos.x = (p.pos.x > BOARD_SIZE - 1) ? (BOARD_SIZE - 1) : p.pos.x;
-        p.pos.y = (p.pos.y > BOARD_SIZE - 1) ? (BOARD_SIZE - 1) : p.pos.y;
-        p.pos.x = (p.pos.x < 0) ? 0 : p.pos.x;
-        p.pos.y = (p.pos.y < 0) ? 0 : p.pos.y;
-
-        board[p.pos.x][p.pos.y] = 1;
+        return false;
     }
+}
+
+bool moveBox(int16_t x, int16_t y, Object &b, uint8_t board[5][5]) {
 }
 
 // 320x240
@@ -100,17 +31,18 @@ int main(void) {
     const uint32_t YSIZE = 5;
     const uint32_t SCREEN_WIDTH = 320;
     const uint32_t SCREEN_HEIGHT = 240;
-
+    //dbg_sprintf(dbgout, "Initialized some things...\n");
     uint8_t board[5][5];
     kb_key_t key;
     Object player;
     Object box;
-    dbg_sprintf(dbgout, "Test");
+    Object goal;
     box.pos = Vector2{2, 2};
-
+    goal.pos = Vector2{4, 4};
     player.pos = Vector2{0, 0};
     board[player.pos.x][player.pos.y] = 1;
     board[box.pos.x][box.pos.y] = 2;
+    board[goal.pos.x][goal.pos.y] = 4;
     gfx_Begin();
     do {
         kb_Scan();
@@ -130,6 +62,7 @@ int main(void) {
         if (kb_IsDown(kb_KeyRight) && !previousRight) {
             movePlayer(1, 0, player, board, box);
         }
+        //checkGoals(goal, box);
 
         // finally, update the previousUp, previousDown, previousLeft, and previousRight variables.
         previousUp = kb_IsDown(kb_KeyUp);
@@ -137,7 +70,7 @@ int main(void) {
         previousRight = kb_IsDown(kb_KeyRight);
         previousDown = kb_IsDown(kb_KeyDown);
 
-        // Player = 1, box = 2 , wall = 3
+        // Player = 1, box = 2 , wall = 3 , goal = 4
         board[box.pos.x][box.pos.y] = 2;
         gfx_SetDrawBuffer();
         // Rendering
@@ -152,6 +85,11 @@ int main(void) {
                     case 2:
                         gfx_SetColor(129);
                         gfx_FillRectangle(x * 48 + 40, y * 48, 48, 48);
+                        break;
+                    case 4:
+                        gfx_SetColor(231);
+                        gfx_FillRectangle(x * 48 + 40, y * 48, 48, 48);
+                        break;
                     default:
                         // gfx_SetColor(184);
                         //gfx_FillCircle(x * 48 + 40 + 24, y * 48 + 24, 24);

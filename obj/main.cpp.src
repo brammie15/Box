@@ -3,15 +3,36 @@
 	section	.text,"ax",@progbits
 	public	_main
 _main:
-	ld	hl, -51
+	ld	hl, -55
 	call	__frameset
 	lea	hl, ix + -48
-	ld	(ix + -51), hl
+	ld	(ix + -52), hl
+	lea	hl, ix + -49
+	ld	(ix + -49), 0
+	ld	(ix + -55), hl
+	push	hl
+	call	__ZN10MainScreen5setupEv
+	pop	hl
+	ld	l, 1
+BB0_1:
+	ld	a, (ix + -49)
+	xor	a, l
+	xor	a, l
+	bit	0, a
+	jq	nz, BB0_3
+	ld	hl, (ix + -55)
+	push	hl
+	call	__ZN10MainScreen4drawEv
+	pop	hl
+	ld	l, 1
+	jq	BB0_1
+BB0_3:
+	ld	hl, (ix + -52)
 	push	hl
 	call	__ZN6Screen5setupEv
 	pop	hl
-BB0_1:
-	ld	hl, (ix + -51)
+BB0_4:
+	ld	hl, (ix + -52)
 	push	hl
 	call	__ZN6Screen4drawEv
 	pop	hl
@@ -25,7 +46,7 @@ BB0_1:
 	pop	de
 	ld	a, l
 	bit	6, a
-	jq	z, BB0_1
+	jq	z, BB0_4
 	or	a, a
 	sbc	hl, hl
 	ld	sp, ix
@@ -43,8 +64,10 @@ _level1:
 	db	"",000o,000o,000o,003o,004o
 
 	ident	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)"
+	extern	__ZN10MainScreen4drawEv
 	extern	__Unwind_SjLj_Register
-	extern	__Unwind_SjLj_Unregister
+	extern	__ZN10MainScreen5setupEv
 	extern	__frameset
+	extern	__Unwind_SjLj_Unregister
 	extern	__ZN6Screen4drawEv
 	extern	__ZN6Screen5setupEv

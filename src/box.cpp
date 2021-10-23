@@ -2,7 +2,7 @@
 
 #include <tice.h>
 
-#include "Headers/common.h"
+#include "Headers/Common.h"
 bool validPos(int8_t x, int8_t y) {
     if (x > BOARD_SIZE - 1 || x < 0 || y > BOARD_SIZE - 1 || y < 0) {
         return false;

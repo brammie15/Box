@@ -1,14 +1,9 @@
 #pragma once
-#include <graphx.h>
 #include <keypadc.h>
-#include <math.h>
 #include <tice.h>
 
-#include "Headers/Levels.h"
-#include "Headers/box.h"
-#include "Headers/common.h"
-#include "Headers/player.h"
-#include "Headers/screen.h"
+#include "Common.h"
+#include "Screen.h"
 class GameScreen : public Screen {
    public:
     uint8_t board[5][5];
@@ -20,5 +15,5 @@ class GameScreen : public Screen {
     bool previousDown;
     bool previousLeft;
     bool previousRight;
-    bool checkGoals(Object goal, Object box);
+    //bool checkGoals(Object goal, Object box);
 };

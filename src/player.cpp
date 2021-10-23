@@ -2,8 +2,8 @@
 
 #include <tice.h>
 
-#include "Headers/box.h"
-#include "Headers/common.h"
+#include "Headers/Box.h"
+#include "Headers/Common.h"
 void movePlayer(int16_t x, int16_t y, Object &p, uint8_t board[5][5], Object &b) {
     if (board[p.pos.x + x][p.pos.y + y] == 2) {  //box is in front
         if (moveBox(x, y, b, board)) {

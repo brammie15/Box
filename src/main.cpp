@@ -10,6 +10,7 @@
 #include "Headers/Levels.h"
 #include "Headers/MainScreen.h"
 #include "Headers/Player.h"
+#include "Headers/Screen.h"
 
 // 320x240
 // 40

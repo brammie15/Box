@@ -18,7 +18,7 @@ __Z10movePlayerssR6ObjectPA5_hS0_:
 	ld	d, a
 	ld	e, c
 	ld	(ix + -12), iy
-	ld	(ix + -9), de
+	ld	(ix + -6), de
 	add	iy, de
 	ld	(ix + -3), iy
 	ld	iy, (ix + 12)
@@ -38,8 +38,9 @@ __Z10movePlayerssR6ObjectPA5_hS0_:
 	ld	(ix + -15), bc
 	push	bc
 	pop	hl
+	ld	(ix + -9), de
 	add	hl, de
-	ld	(ix + -6), hl
+	ex	de, hl
 	ld	bc, 5
 	ld	hl, (ix + -3)
 	ld	iy, (ix + 15)
@@ -48,12 +49,10 @@ __Z10movePlayerssR6ObjectPA5_hS0_:
 	pop	bc
 	lea	hl, iy + 0
 	add	hl, bc
-	ld	bc, (ix + -6)
-	add	hl, bc
+	add	hl, de
 	ld	a, (hl)
 	cp	a, 2
-	jq	nz, BB0_11
-	ld	(ix + -3), de
+	jq	nz, BB0_3
 	ld	hl, (ix + 18)
 	push	iy
 	push	hl
@@ -64,6 +63,8 @@ __Z10movePlayerssR6ObjectPA5_hS0_:
 	ld	h, (ix + 7)
 	push	hl
 	call	__Z7moveBoxssR6ObjectPA5_h
+	ld	iy, (ix + 15)
+	lea	de, iy + 0
 	pop	hl
 	pop	hl
 	pop	hl
@@ -71,54 +72,79 @@ __Z10movePlayerssR6ObjectPA5_hS0_:
 	ld	l, 1
 	xor	a, l
 	bit	0, a
-	jq	nz, BB0_22
-	ld	hl, (ix + 12)
-	push	hl
-	pop	iy
+	jq	nz, BB0_14
+	ld	iy, (ix + 12)
 	ld	hl, (iy)
 	ld	iy, (iy + 3)
 	ld	bc, 5
 	call	__imulu
+	push	de
+	pop	bc
 	push	hl
 	pop	de
-	ld	hl, (ix + 15)
+	push	bc
+	pop	hl
 	add	hl, de
 	lea	de, iy + 0
 	add	hl, de
 	ld	(hl), 0
 	ld	hl, (ix + 12)
 	ld	hl, (hl)
-	ld	de, (ix + -9)
+	ld	de, (ix + -6)
 	add	hl, de
 	push	hl
 	pop	bc
 	ld	iy, (ix + 12)
 	ld	iy, (iy + 3)
-	ld	de, (ix + -3)
+	jq	BB0_5
+BB0_3:
+	cp	a, 3
+	jq	z, BB0_14
+	ld	bc, 5
+	ld	hl, (ix + -12)
+	call	__imulu
+	push	hl
+	pop	de
+	lea	hl, iy + 0
+	add	hl, de
+	ld	de, (ix + -15)
+	add	hl, de
+	ld	(hl), 0
+	ld	hl, (ix + 12)
+	push	hl
+	pop	iy
+	ld	hl, (iy)
+	ld	de, (ix + -6)
+	add	hl, de
+	ld	iy, (iy + 3)
+	push	hl
+	pop	bc
+BB0_5:
+	ld	de, (ix + -9)
 	add	iy, de
 	ld	de, 4
 	or	a, a
 	sbc	hl, de
 	call	__setflag
-	jq	m, BB0_4
+	jq	m, BB0_7
 	ld	bc, 4
-BB0_4:
+BB0_7:
 	lea	hl, iy + 0
 	or	a, a
 	sbc	hl, de
 	call	__setflag
-	jq	m, BB0_6
+	jq	m, BB0_9
 	ld	iy, 4
-BB0_6:
+BB0_9:
 	ld	de, 1
 	push	bc
 	pop	hl
 	or	a, a
 	sbc	hl, de
 	call	__setflag
-	jq	p, BB0_8
+	jq	p, BB0_11
 	ld	bc, 0
-BB0_8:
+BB0_11:
 	ld	hl, (ix + 12)
 	ld	(ix + -3), bc
 	ld	(hl), bc
@@ -128,77 +154,12 @@ BB0_8:
 	sbc	hl, bc
 	call	__setflag
 	lea	de, iy + 0
-	jq	p, BB0_10
+	jq	p, BB0_13
 	ld	de, 0
-BB0_10:
+BB0_13:
 	ld	iy, (ix + 12)
 	ld	(iy + 3), de
 	ld	hl, (ix + -3)
-	jq	BB0_20
-BB0_11:
-	ld	bc, 5
-	ld	hl, (ix + -12)
-	call	__imulu
-	push	hl
-	pop	bc
-	lea	hl, iy + 0
-	add	hl, bc
-	ld	bc, (ix + -15)
-	add	hl, bc
-	ld	(hl), 0
-	ld	hl, (ix + 12)
-	ld	iy, (hl)
-	ld	bc, (ix + -9)
-	add	iy, bc
-	lea	bc, iy + 0
-	push	hl
-	pop	iy
-	ld	hl, (iy + 3)
-	push	bc
-	pop	iy
-	add	hl, de
-	push	hl
-	pop	bc
-	ld	de, 4
-	lea	hl, iy + 0
-	or	a, a
-	sbc	hl, de
-	call	__setflag
-	jq	m, BB0_13
-	ld	iy, 4
-BB0_13:
-	push	bc
-	pop	hl
-	or	a, a
-	sbc	hl, de
-	call	__setflag
-	jq	m, BB0_15
-	ld	bc, 4
-BB0_15:
-	ld	de, 1
-	lea	hl, iy + 0
-	or	a, a
-	sbc	hl, de
-	call	__setflag
-	jq	p, BB0_17
-	ld	iy, 0
-BB0_17:
-	ld	hl, (ix + 12)
-	ld	(hl), iy
-	push	bc
-	pop	hl
-	or	a, a
-	sbc	hl, de
-	call	__setflag
-	push	bc
-	pop	de
-	lea	hl, iy + 0
-	jq	p, BB0_19
-	ld	de, 0
-BB0_19:
-	ld	iy, (ix + 12)
-	ld	(iy + 3), de
-BB0_20:
 	ld	bc, 5
 	call	__imulu
 	push	hl
@@ -207,7 +168,7 @@ BB0_20:
 	add	hl, bc
 	add	hl, de
 	ld	(hl), 1
-BB0_22:
+BB0_14:
 	ld	sp, ix
 	pop	ix
 	ret

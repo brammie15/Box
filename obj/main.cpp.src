@@ -1,351 +1,20 @@
 	section	.text,"ax",@progbits
 	assume	adl = 1
 	section	.text,"ax",@progbits
-	public	__Z10checkGoals6ObjectS_
-__Z10checkGoals6ObjectS_:
-	call	__frameset0
-	xor	a, a
-	ld	hl, (ix + 6)
-	ld	de, (ix + 12)
-	or	a, a
-	sbc	hl, de
-	jq	nz, BB0_3
-	ld	hl, (ix + 9)
-	ld	de, (ix + 15)
-	or	a, a
-	sbc	hl, de
-	jq	nz, BB0_3
-	ld	a, 1
-	jq	BB0_4
-BB0_3:
-BB0_4:
-	pop	ix
-	ret
-	section	.text,"ax",@progbits
-
-	section	.text,"ax",@progbits
-	public	__Z7moveBoxssR6ObjectPA5_h
-__Z7moveBoxssR6ObjectPA5_h:
-	call	__frameset0
-	section	.text,"ax",@progbits
-
-	section	.text,"ax",@progbits
 	public	_main
 _main:
-	ld	hl, -61
+	ld	hl, -51
 	call	__frameset
-	ld	hl, 2
-	ld	de, 0
-	lea	bc, ix + -25
-	ld	(ix + -46), bc
-	lea	bc, ix + -31
-	ld	(ix + -58), bc
-	lea	bc, ix + -37
-	ld	(ix + -61), bc
-	ld	(ix + -37), hl
-	ld	(ix + -34), hl
-	ld	(ix + -31), de
-	ld	(ix + -28), de
-	ld	(ix + -25), 1
-	ld	(ix + -13), 2
-	ld	(ix + -1), 4
-	call	_gfx_Begin
-BB2_1:
-	call	_kb_Scan
-	ld	iy, -720866
-	ld	l, (iy)
-	ld	h, (iy + 1)
-	ld	a, (_previousUp)
-	bit	3, l
-	jq	z, BB2_4
-	or	a, a
-	jq	nz, BB2_4
-	ld	hl, (ix + -61)
+	lea	hl, ix + -48
+	ld	(ix + -51), hl
 	push	hl
-	ld	hl, (ix + -46)
-	push	hl
-	ld	hl, (ix + -58)
-	push	hl
-	ld	hl, -1
-	push	hl
-	inc	hl
-	push	hl
-	call	__Z10movePlayerssR6ObjectPA5_hS0_
-	ld	iy, -720866
+	call	__ZN6Screen5setupEv
 	pop	hl
-	pop	hl
-	pop	hl
-	pop	hl
-	pop	hl
-BB2_4:
-	ld	l, (iy)
-	ld	h, (iy + 1)
-	ld.sis	bc, 1
-	call	__sand
-	ld	a, (_previousDown)
-	ld	e, a
-	ld	a, l
-	ld	l, 1
-	xor	a, l
-	bit	0, a
-	jq	nz, BB2_7
-	ld	a, e
-	or	a, a
-	jq	nz, BB2_7
-	ld	hl, (ix + -61)
+BB0_1:
+	ld	hl, (ix + -51)
 	push	hl
-	ld	hl, (ix + -46)
-	push	hl
-	ld	hl, (ix + -58)
-	push	hl
-	ld	hl, 1
-	push	hl
-	dec	hl
-	push	hl
-	call	__Z10movePlayerssR6ObjectPA5_hS0_
-	ld	iy, -720866
+	call	__ZN6Screen4drawEv
 	pop	hl
-	pop	hl
-	pop	hl
-	pop	hl
-	pop	hl
-BB2_7:
-	ld	l, (iy)
-	ld	h, (iy + 1)
-	ld	a, (_previousLeft)
-	bit	1, l
-	jq	z, BB2_10
-	or	a, a
-	jq	nz, BB2_10
-	ld	hl, (ix + -61)
-	push	hl
-	ld	hl, (ix + -46)
-	push	hl
-	ld	hl, (ix + -58)
-	push	hl
-	or	a, a
-	sbc	hl, hl
-	push	hl
-	dec	hl
-	push	hl
-	call	__Z10movePlayerssR6ObjectPA5_hS0_
-	ld	iy, -720866
-	pop	hl
-	pop	hl
-	pop	hl
-	pop	hl
-	pop	hl
-BB2_10:
-	ld	l, (iy)
-	ld	h, (iy + 1)
-	ld	a, (_previousRight)
-	bit	2, l
-	jq	z, BB2_13
-	or	a, a
-	jq	nz, BB2_13
-	ld	hl, (ix + -61)
-	push	hl
-	ld	hl, (ix + -46)
-	push	hl
-	ld	hl, (ix + -58)
-	push	hl
-	or	a, a
-	sbc	hl, hl
-	push	hl
-	inc	hl
-	push	hl
-	call	__Z10movePlayerssR6ObjectPA5_hS0_
-	ld	iy, -720866
-	pop	hl
-	pop	hl
-	pop	hl
-	pop	hl
-	pop	hl
-BB2_13:
-	ld	l, (iy)
-	ld	h, (iy + 1)
-	ld	c, 3
-	call	__sshru
-	ld	a, l
-	and	a, 1
-	ld	(_previousUp), a
-	ld	l, (iy)
-	ld	h, (iy + 1)
-	ld	c, 1
-	call	__sshru
-	ld	a, l
-	and	a, 1
-	ld	(_previousLeft), a
-	ld	l, (iy)
-	ld	h, (iy + 1)
-	inc	c
-	call	__sshru
-	ld	a, l
-	and	a, 1
-	ld	(_previousRight), a
-	ld	l, (iy)
-	ld	h, (iy + 1)
-	ld	a, l
-	and	a, 1
-	ld	(_previousDown), a
-	ld	hl, (ix + -37)
-	ld	de, (ix + -34)
-	ld	bc, 5
-	call	__imulu
-	push	hl
-	pop	bc
-	ld	hl, (ix + -46)
-	add	hl, bc
-	add	hl, de
-	ld	(hl), 2
-	ld	hl, 1
-	push	hl
-	call	_gfx_SetDraw
-	pop	hl
-	ld	hl, -1
-	push	hl
-	call	_gfx_FillScreen
-	pop	hl
-	ld	hl, (ix + -46)
-	ld	(ix + -40), hl
-	or	a, a
-	sbc	hl, hl
-	ld	bc, 48
-BB2_14:
-	push	hl
-	pop	iy
-	ld	de, 5
-	or	a, a
-	sbc	hl, de
-	jq	z, BB2_16
-	ld	(ix + -49), iy
-	lea	hl, iy + 0
-	call	__imulu
-	ld	de, 40
-	add	hl, de
-	ld	(ix + -52), hl
-	ld	iy, (ix + -40)
-	or	a, a
-	sbc	hl, hl
-BB2_17:
-	ld	(ix + -43), hl
-	ld	de, 240
-	or	a, a
-	sbc	hl, de
-	jq	z, BB2_18
-	ld	a, (iy)
-	cp	a, 1
-	ld	l, 7
-	jq	z, BB2_23
-	cp	a, 2
-	ld	l, -127
-	jq	z, BB2_23
-	cp	a, 4
-	ld	hl, 48
-	push	hl
-	pop	bc
-	ld	hl, (ix + -43)
-	jq	nz, BB2_24
-	ld	a, -25
-	ld	l, a
-BB2_23:
-	push	hl
-	ld	(ix + -55), iy
-	call	_gfx_SetColor
-	pop	hl
-	ld	hl, 48
-	push	hl
-	push	hl
-	ld	hl, (ix + -43)
-	push	hl
-	ld	hl, (ix + -52)
-	push	hl
-	call	_gfx_FillRectangle
-	ld	bc, 48
-	ld	iy, (ix + -55)
-	pop	hl
-	pop	hl
-	pop	hl
-	pop	hl
-	ld	hl, (ix + -43)
-BB2_24:
-	add	hl, bc
-	inc	iy
-	jq	BB2_17
-BB2_18:
-	ld	hl, (ix + -49)
-	inc	hl
-	ld	iy, (ix + -40)
-	lea	iy, iy + 5
-	ld	(ix + -40), iy
-	jq	BB2_14
-BB2_16:
-	or	a, a
-	sbc	hl, hl
-	push	hl
-	call	_gfx_SetColor
-	pop	hl
-	ld	bc, 0
-	xor	a, a
-	ld	e, a
-BB2_25:
-	push	bc
-	pop	iy
-	push	bc
-	pop	hl
-	ld	(ix + -40), e
-	ld	bc, 240
-	call	__lcmpu
-	push	bc
-	pop	hl
-	jq	nc, BB2_26
-	push	hl
-	ld	(ix + -43), iy
-	push	iy
-	ld	hl, 40
-	push	hl
-	call	_gfx_HorizLine
-	xor	a, a
-	pop	hl
-	pop	hl
-	pop	hl
-	ld	hl, (ix + -43)
-	ld	e, (ix + -40)
-	ld	bc, 48
-	call	__ladd
-	push	hl
-	pop	bc
-	jq	BB2_25
-BB2_26:
-	ld	hl, 40
-	ld	e, a
-BB2_28:
-	push	hl
-	pop	iy
-	ld	bc, 320
-	call	__lcmpu
-	jq	nc, BB2_29
-	ld	hl, 240
-	push	hl
-	or	a, a
-	sbc	hl, hl
-	push	hl
-	ld	(ix + -43), iy
-	push	iy
-	ld	(ix + -40), e
-	call	_gfx_VertLine
-	pop	hl
-	pop	hl
-	pop	hl
-	ld	hl, (ix + -43)
-	ld	e, (ix + -40)
-	ld	bc, 48
-	xor	a, a
-	call	__ladd
-	xor	a, a
-	jq	BB2_28
-BB2_29:
-	call	_gfx_SwapDraw
 	ld	hl, -720868
 	push	de
 	ld	e, (hl)
@@ -356,8 +25,7 @@ BB2_29:
 	pop	de
 	ld	a, l
 	bit	6, a
-	jq	z, BB2_1
-	call	_gfx_End
+	jq	z, BB0_1
 	or	a, a
 	sbc	hl, hl
 	ld	sp, ix
@@ -365,44 +33,18 @@ BB2_29:
 	ret
 	section	.text,"ax",@progbits
 
-	section	.bss,"aw",@nobits
-	public	_previousUp
-_previousUp:
-	rb	1
-
-	section	.bss,"aw",@nobits
-	public	_previousDown
-_previousDown:
-	rb	1
-
-	section	.bss,"aw",@nobits
-	public	_previousLeft
-_previousLeft:
-	rb	1
-
-	section	.bss,"aw",@nobits
-	public	_previousRight
-_previousRight:
-	rb	1
+	section	.data,"aw",@progbits
+	public	_level1
+_level1:
+	db	"",001o,003o,000o,000o,000o
+	db	"",000o,003o,000o,003o,002o
+	db	"",000o,003o,000o,003o,000o
+	db	"",000o,003o,000o,003o,000o
+	db	"",000o,000o,000o,003o,004o
 
 	ident	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)"
 	extern	__Unwind_SjLj_Register
-	extern	__frameset
-	extern	_gfx_Begin
-	extern	_kb_Scan
-	extern	_gfx_HorizLine
-	extern	__sand
-	extern	_gfx_SwapDraw
-	extern	__Z10movePlayerssR6ObjectPA5_hS0_
-	extern	__ladd
-	extern	__sshru
-	extern	_gfx_SetDraw
-	extern	_gfx_FillScreen
-	extern	_gfx_VertLine
 	extern	__Unwind_SjLj_Unregister
-	extern	_gfx_FillRectangle
-	extern	__imulu
-	extern	_gfx_SetColor
-	extern	__lcmpu
-	extern	_gfx_End
-	extern	__frameset0
+	extern	__frameset
+	extern	__ZN6Screen4drawEv
+	extern	__ZN6Screen5setupEv

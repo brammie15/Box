@@ -1,7 +1,8 @@
-#include "box.h"
+#include "Headers/box.h"
 
-#include "common.h"
-#include "tice.h"
+#include <tice.h>
+
+#include "Headers/common.h"
 bool validPos(int8_t x, int8_t y) {
     if (x > BOARD_SIZE - 1 || x < 0 || y > BOARD_SIZE - 1 || y < 0) {
         return false;

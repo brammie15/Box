@@ -6,7 +6,9 @@
 	],
 	"settings": {
 		"files.associations": {
-			"type_traits": "cpp"
+			"type_traits": "cpp",
+			"vector": "cpp",
+			"xutility": "cpp"
 		}
 	}
 }

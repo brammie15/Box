@@ -4,6 +4,7 @@
 #include <math.h>
 #include <tice.h>
 
+#include "Levels.h"
 #include "box.h"
 #include "common.h"
 #include "player.h"
@@ -21,9 +22,6 @@ bool checkGoals(Object goal, Object box) {
     }
 }
 
-bool moveBox(int16_t x, int16_t y, Object &b, uint8_t board[5][5]) {
-}
-
 // 320x240
 // 40
 int main(void) {
@@ -37,9 +35,33 @@ int main(void) {
     Object player;
     Object box;
     Object goal;
-    box.pos = Vector2{2, 2};
-    goal.pos = Vector2{4, 4};
-    player.pos = Vector2{0, 0};
+
+    //level loading
+    for (uint8_t x = 0; x < 5; x++) {
+        for (uint8_t y = 0; y < 5; y++) {
+            switch (level1[y][4 - x]) {  //inverted and -4 because otherwise is flipped and roated 90deg clockwise
+                case 0:
+                    board[x][y] = 0;
+                    break;
+                case 1:
+                    board[x][y] = 1;
+                    player.pos = Vector2{x, y};
+                    break;
+                case 2:
+                    board[x][y] = 2;
+                    box.pos = Vector2{x, y};
+                    break;
+                case 3:
+                    board[x][y] = 3;
+                    break;
+                case 4:
+                    board[x][y] = 4;
+                    goal.pos = Vector2{x, y};
+                    break;
+            }
+        }
+    }
+
     board[player.pos.x][player.pos.y] = 1;
     board[box.pos.x][box.pos.y] = 2;
     board[goal.pos.x][goal.pos.y] = 4;
@@ -62,7 +84,9 @@ int main(void) {
         if (kb_IsDown(kb_KeyRight) && !previousRight) {
             movePlayer(1, 0, player, board, box);
         }
-        //checkGoals(goal, box);
+        if (checkGoals(goal, box)) {
+            //win
+        }
 
         // finally, update the previousUp, previousDown, previousLeft, and previousRight variables.
         previousUp = kb_IsDown(kb_KeyUp);
@@ -71,7 +95,6 @@ int main(void) {
         previousDown = kb_IsDown(kb_KeyDown);
 
         // Player = 1, box = 2 , wall = 3 , goal = 4
-        board[box.pos.x][box.pos.y] = 2;
         gfx_SetDrawBuffer();
         // Rendering
         gfx_FillScreen(255);
@@ -80,21 +103,22 @@ int main(void) {
                 switch (board[x][y]) {
                     case 1:
                         gfx_SetColor(7);
-                        gfx_FillRectangle(x * 48 + 40, y * 48, 48, 48);
                         break;
                     case 2:
                         gfx_SetColor(129);
-                        gfx_FillRectangle(x * 48 + 40, y * 48, 48, 48);
+                        break;
+                    case 3:
+                        gfx_SetColor(0);
                         break;
                     case 4:
                         gfx_SetColor(231);
-                        gfx_FillRectangle(x * 48 + 40, y * 48, 48, 48);
                         break;
+                    case 0:
+                        gfx_SetColor(255);
                     default:
-                        // gfx_SetColor(184);
-                        //gfx_FillCircle(x * 48 + 40 + 24, y * 48 + 24, 24);
                         break;
                 }
+                gfx_FillRectangle(x * 48 + 40, y * 48, 48, 48);
             }
         }
 

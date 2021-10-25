@@ -6,9 +6,16 @@
 
 #include "Common.h"
 #include "Screen.h"
-class MainScreen : Screen {
+
+class MainScreen : public Screen {
    public:
-    void setup();
-    void draw();
+    virtual void setup() override;
+    virtual void draw() override;
+
     bool shouldStart = false;
+
+   private:
+    bool previousUp;
+    bool previousDown;
+    bool previousEnter;
 };

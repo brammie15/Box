@@ -3,71 +3,826 @@
 	section	.text,"ax",@progbits
 	public	_main
 _main:
-	ld	hl, -55
+	private	func_begin0
+func_begin0:
+	file	0 "C:\Users\bramm\Desktop\CEdev\Box\src\main.cpp" md5 0xc147678a8a941a197aa6de8b04814b67
+	file	1 "C:/Users/bramm/Desktop/CEdev/Box/src\main.cpp" md5 0xc147678a8a941a197aa6de8b04814b67
+	loc	1 10 0
+	cfi_sections .debug_frame
+	cfi_startproc
+	ld	hl, -124
 	call	__frameset
-	lea	hl, ix + -48
-	ld	(ix + -52), hl
-	lea	hl, ix + -49
-	ld	(ix + -49), 0
-	ld	(ix + -55), hl
+	private	tmp0
+tmp0:
+	cfi_def_cfa ix, 6
+	cfi_offset ix, -6
+	file	2 "src/Headers\GameScreen.h" md5 0x786429819a7e7f3637c9d538d87706c5
+	loc	2 0 0 prologue_end
+	ld	hl, __ZTV10GameScreen+6
+	ld	de, 0
+	lea	iy, ix + -110
+	lea	bc, ix + -118
+	loc	2 10 7
+	ld	(ix + -124), bc
+	private	tmp1
+tmp1:
+	ld	(ix + -110), hl
+	private	tmp2
+tmp2:
+	loc	2 0 7 is_stmt 0
+	ld	hl, 24
+	private	tmp3
+tmp3:
+	file	3 "src/Headers\Common.h" md5 0x28c73cde70429bf55bdf8d4b15cae8dc
+	loc	3 13 9 is_stmt 1
+	push	hl
+	push	de
+	ld	(ix + -121), iy
+	private	tmp4
+tmp4:
+	pea	iy + 80
+	call	_memset
+	private	tmp5
+tmp5:
+	pop	hl
+	pop	hl
+	pop	hl
+	private	tmp6
+tmp6:
+	loc	2 19 10
+	ld	(ix + -6), 1
+	private	tmp7
+tmp7:
+	file	4 "src/Headers\MainScreen.h" md5 0x892393832a1bc1fc57c520dfe28ce2cb
+	loc	4 10 7
+	ld	hl, __ZTV10MainScreen+6
+	private	tmp8
+tmp8:
+	ld	(ix + -118), hl
+	loc	4 15 10
+	ld	(ix + -114), 0
+	private	tmp9
+tmp9:
+	loc	1 14 11
+	ld	hl, (ix + -124)
 	push	hl
 	call	__ZN10MainScreen5setupEv
+	private	tmp10
+tmp10:
 	pop	hl
-	ld	l, 1
+	private	tmp11
+tmp11:
 BB0_1:
-	ld	a, (ix + -49)
+	loc	1 16 15
+	ld	hl, (ix + -124)
+	push	hl
+	call	__ZN10MainScreen4drawEv
+	private	tmp12
+tmp12:
+	pop	hl
+	private	tmp13
+tmp13:
+	loc	1 17 21
+	ld	a, (ix + -114)
+	ld	l, 1
 	xor	a, l
+	private	tmp14
+tmp14:
+	loc	1 17 5 is_stmt 0
+	bit	0, a
+	jq	nz, BB0_1
+	private	tmp15
+tmp15:
+	loc	1 19 10 is_stmt 1
+	ld	hl, (ix + -121)
+	push	hl
+	call	__ZN10GameScreen5setupEv
+	private	tmp16
+tmp16:
+	pop	hl
+BB0_3:
+	private	tmp17
+tmp17:
+	loc	1 21 15
+	ld	hl, (ix + -121)
+	push	hl
+	call	__ZN10GameScreen4drawEv
+	private	tmp18
+tmp18:
+	pop	hl
+	private	tmp19
+tmp19:
+	loc	1 22 20
+	ld	a, (ix + -6)
+	ld	l, 1
+	xor	a, l
+	private	tmp20
+tmp20:
+	loc	1 22 6 is_stmt 0
 	xor	a, l
 	bit	0, a
 	jq	nz, BB0_3
-	ld	hl, (ix + -55)
-	push	hl
-	call	__ZN10MainScreen4drawEv
-	pop	hl
-	ld	l, 1
-	jq	BB0_1
-BB0_3:
-	ld	hl, (ix + -52)
-	push	hl
-	call	__ZN6Screen5setupEv
-	pop	hl
-BB0_4:
-	ld	hl, (ix + -52)
-	push	hl
-	call	__ZN6Screen4drawEv
-	pop	hl
-	ld	hl, -720868
-	push	de
-	ld	e, (hl)
-	inc	hl
-	ld	d, (hl)
-	ld	l, e
-	ld	h, d
-	pop	de
-	ld	a, l
-	bit	6, a
-	jq	z, BB0_4
+	private	tmp21
+tmp21:
+	loc	1 24 5 is_stmt 1
 	or	a, a
 	sbc	hl, hl
 	ld	sp, ix
 	pop	ix
+	cfi_def_cfa sp, 3
+	cfi_restore ix
 	ret
+	private	tmp22
+tmp22:
 	section	.text,"ax",@progbits
+	private	func_end0
+func_end0:
+	cfi_endproc
+	file	5 "<stdin>"
 
-	section	.data,"aw",@progbits
-	public	_level1
-_level1:
-	db	"",001o,003o,000o,000o,000o
-	db	"",000o,003o,000o,003o,002o
-	db	"",000o,003o,000o,003o,000o
-	db	"",000o,003o,000o,003o,000o
-	db	"",000o,000o,000o,003o,004o
+	section	.debug_loclists,"",@progbits
+	dd	debug_list_header_end0-debug_list_header_start0
+	private	debug_list_header_start0
+debug_list_header_start0:
+	dw	5
+	db	3
+	db	0
+	dd	4
+	private	loclists_table_base0
+loclists_table_base0:
+	dd	debug_loc0-loclists_table_base0
+	dd	debug_loc1-loclists_table_base0
+	dd	debug_loc2-loclists_table_base0
+	dd	debug_loc3-loclists_table_base0
+	private	debug_loc0
+debug_loc0:
+	db	4
+	uleb128	tmp1-func_begin0
+	uleb128	tmp4-func_begin0
+	db	1
+	db	85
+	db	4
+	uleb128	tmp4-func_begin0
+	uleb128	tmp11-func_begin0
+	db	2
+	db	116
+	db	3
+	db	0
+	private	debug_loc1
+debug_loc1:
+	db	4
+	uleb128	tmp3-func_begin0
+	uleb128	tmp4-func_begin0
+	db	4
+	db	117
+	db	208
+	db	0
+	db	159
+	db	4
+	uleb128	tmp4-func_begin0
+	uleb128	tmp11-func_begin0
+	db	7
+	db	116
+	db	3
+	db	148
+	db	3
+	db	35
+	db	80
+	db	159
+	db	0
+	private	debug_loc2
+debug_loc2:
+	db	4
+	uleb128	tmp3-func_begin0
+	uleb128	tmp4-func_begin0
+	db	4
+	db	117
+	db	208
+	db	0
+	db	159
+	db	4
+	uleb128	tmp4-func_begin0
+	uleb128	tmp11-func_begin0
+	db	7
+	db	116
+	db	3
+	db	148
+	db	3
+	db	35
+	db	80
+	db	159
+	db	0
+	private	debug_loc3
+debug_loc3:
+	db	4
+	uleb128	tmp8-func_begin0
+	uleb128	tmp11-func_begin0
+	db	2
+	db	116
+	db	0
+	db	0
+	private	debug_list_header_end0
+debug_list_header_end0:
+	section	.debug_abbrev,"",@progbits
+	private	abbrev_start43
+abbrev_start43:
+	db	1
+	db	17
+	db	1
+	db	37
+	db	37
+	db	19
+	db	5
+	db	3
+	db	37
+	db	114
+	db	23
+	db	16
+	db	23
+	db	27
+	db	37
+	db	17
+	db	27
+	db	18
+	db	6
+	db	115
+	db	23
+	db	"",214o,001o
+	db	23
+	db	0
+	db	0
+	db	2
+	db	2
+	db	1
+	db	3
+	db	37
+	db	60
+	db	25
+	db	0
+	db	0
+	db	3
+	db	46
+	db	1
+	db	3
+	db	37
+	db	60
+	db	25
+	db	52
+	db	25
+	db	63
+	db	25
+	db	50
+	db	11
+	db	0
+	db	0
+	db	4
+	db	5
+	db	0
+	db	73
+	db	19
+	db	52
+	db	25
+	db	0
+	db	0
+	db	5
+	db	15
+	db	0
+	db	73
+	db	19
+	db	0
+	db	0
+	db	6
+	db	46
+	db	1
+	db	58
+	db	11
+	db	59
+	db	11
+	db	110
+	db	37
+	db	71
+	db	19
+	db	32
+	db	11
+	db	100
+	db	19
+	db	0
+	db	0
+	db	7
+	db	5
+	db	0
+	db	3
+	db	37
+	db	73
+	db	19
+	db	52
+	db	25
+	db	0
+	db	0
+	db	8
+	db	19
+	db	1
+	db	54
+	db	11
+	db	3
+	db	37
+	db	11
+	db	11
+	db	58
+	db	11
+	db	59
+	db	11
+	db	0
+	db	0
+	db	9
+	db	13
+	db	0
+	db	3
+	db	37
+	db	73
+	db	19
+	db	58
+	db	11
+	db	59
+	db	11
+	db	56
+	db	11
+	db	0
+	db	0
+	db	10
+	db	46
+	db	1
+	db	3
+	db	37
+	db	60
+	db	25
+	db	52
+	db	25
+	db	63
+	db	25
+	db	0
+	db	0
+	db	11
+	db	36
+	db	0
+	db	3
+	db	37
+	db	62
+	db	11
+	db	11
+	db	11
+	db	0
+	db	0
+	db	12
+	db	2
+	db	1
+	db	54
+	db	11
+	db	3
+	db	37
+	db	11
+	db	11
+	db	58
+	db	11
+	db	59
+	db	11
+	db	0
+	db	0
+	db	13
+	db	13
+	db	0
+	db	3
+	db	37
+	db	73
+	db	19
+	db	58
+	db	11
+	db	59
+	db	11
+	db	56
+	db	11
+	db	50
+	db	11
+	db	0
+	db	0
+	db	14
+	db	46
+	db	1
+	db	17
+	db	27
+	db	18
+	db	6
+	db	64
+	db	24
+	db	122
+	db	25
+	db	3
+	db	37
+	db	58
+	db	11
+	db	59
+	db	11
+	db	73
+	db	19
+	db	63
+	db	25
+	db	0
+	db	0
+	db	15
+	db	52
+	db	0
+	db	2
+	db	24
+	db	3
+	db	37
+	db	58
+	db	11
+	db	59
+	db	11
+	db	73
+	db	19
+	db	0
+	db	0
+	db	16
+	db	29
+	db	1
+	db	49
+	db	19
+	db	17
+	db	27
+	db	18
+	db	6
+	db	88
+	db	11
+	db	89
+	db	11
+	db	87
+	db	11
+	db	0
+	db	0
+	db	17
+	db	5
+	db	0
+	db	2
+	db	34
+	db	49
+	db	19
+	db	0
+	db	0
+	db	0
+	section	.debug_info,"",@progbits
+	private	cu_begin0
+cu_begin0:
+	dd	debug_info_end0-debug_info_start0
+	private	debug_info_start0
+debug_info_start0:
+	dw	5
+	db	1
+	db	3
+	dd	abbrev_start43
+	db	1
+	db	0
+	dw	33
+	db	1
+	dd	str_offsets_base0
+	dd	line_table_start0
+	db	2
+	db	0
+	dd	func_end0-func_begin0
+	dd	addr_table_base0
+	dd	loclists_table_base0
+	db	2
+	db	3
 
+	db	3
+	db	3
+
+
+
+	db	1
+	db	4
+	dd	51
+
+	db	0
+	db	0
+	db	5
+	dd	39
+	db	6
+	db	2
+	db	10
+	db	4
+	dd	41
+	db	1
+	dd	69
+	db	7
+	db	5
+	dd	76
+
+	db	0
+	db	5
+	dd	39
+	db	8
+	db	5
+	db	9
+	db	6
+	db	3
+	db	11
+	db	9
+	db	6
+	dd	114
+	db	3
+	db	12
+	db	0
+	db	9
+	db	8
+	dd	114
+	db	3
+	db	13
+	db	3
+	db	10
+	db	9
+
+
+
+	db	4
+	dd	118
+
+	db	0
+	db	0
+	db	11
+	db	7
+	db	5
+	db	3
+	db	5
+	dd	81
+	db	6
+	db	3
+	db	11
+	db	10
+	dd	105
+	db	1
+	dd	136
+	db	7
+	db	5
+	dd	143
+
+	db	0
+	db	5
+	dd	81
+	db	12
+	db	5
+	db	12
+	db	6
+	db	3
+	db	15
+	db	13
+	db	11
+	dd	81
+	db	3
+	db	17
+	db	0
+	db	1
+	db	3
+	db	12
+
+
+
+	db	1
+	db	4
+	dd	174
+
+	db	0
+	db	0
+	db	5
+	dd	148
+	db	6
+	db	3
+	db	15
+	db	13
+	dd	164
+	db	1
+	dd	192
+	db	7
+	db	5
+	dd	199
+
+	db	0
+	db	5
+	dd	148
+	db	2
+	db	14
+
+	db	3
+	db	14
+
+
+
+	db	1
+	db	4
+	dd	216
+
+	db	0
+	db	0
+	db	5
+	dd	204
+	db	6
+	db	4
+	db	10
+	db	15
+	dd	206
+	db	1
+	dd	234
+	db	7
+	db	5
+	dd	241
+
+	db	0
+	db	5
+	dd	204
+	db	14
+	db	0
+	dd	func_end0-func_begin0
+	db	1
+	db	84
+
+	db	16
+	db	1
+	db	10
+	dd	114
+
+	db	15
+	db	2
+	db	145
+	db	14
+	db	17
+	db	1
+	db	11
+	dd	39
+	db	15
+	db	2
+	db	145
+	db	6
+	db	18
+	db	1
+	db	12
+	dd	204
+	db	16
+	dd	56
+	db	1
+	dd	tmp7-tmp0
+	db	1
+	db	11
+	db	16
+	db	17
+	db	0
+	dd	69
+	db	16
+	dd	179
+	db	2
+	dd	tmp6-tmp3
+	db	2
+	db	10
+	db	7
+	db	17
+	db	2
+	dd	192
+	db	16
+	dd	123
+	db	2
+	dd	tmp6-tmp3
+	db	3
+	db	15
+	db	7
+	db	17
+	db	1
+	dd	136
+	db	0
+	db	0
+	db	0
+	db	16
+	dd	221
+	db	3
+	dd	tmp9-tmp7
+	db	1
+	db	12
+	db	16
+	db	17
+	db	3
+	dd	234
+	db	0
+	db	0
+	db	0
+	private	debug_info_end0
+debug_info_end0:
+	section	.debug_str_offsets,"",@progbits
+	dd	80
+	dw	5
+	dw	0
+	private	str_offsets_base0
+str_offsets_base0:
+	section	.debug_str,"MS",@progbits,1
+	private	info_string0
+info_string0:
+	db	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)",000o
+	private	info_string1
+info_string1:
+	db	"src\main.cpp",000o
+	private	info_string2
+info_string2:
+	db	"C:\Users\bramm\Desktop\CEdev\Box",000o
+	private	info_string3
+info_string3:
+	db	"GameScreen",000o
+	private	info_string4
+info_string4:
+	db	"_ZN10GameScreenC2Ev",000o
+	private	info_string5
+info_string5:
+	db	"this",000o
+	private	info_string6
+info_string6:
+	db	"x",000o
+	private	info_string7
+info_string7:
+	db	"int",000o
+	private	info_string8
+info_string8:
+	db	"y",000o
+	private	info_string9
+info_string9:
+	db	"Vector2",000o
+	private	info_string10
+info_string10:
+	db	"_ZN7Vector2C2Ev",000o
+	private	info_string11
+info_string11:
+	db	"pos",000o
+	private	info_string12
+info_string12:
+	db	"Object",000o
+	private	info_string13
+info_string13:
+	db	"_ZN6ObjectC2Ev",000o
+	private	info_string14
+info_string14:
+	db	"MainScreen",000o
+	private	info_string15
+info_string15:
+	db	"_ZN10MainScreenC2Ev",000o
+	private	info_string16
+info_string16:
+	db	"main",000o
+	private	info_string17
+info_string17:
+	db	"game",000o
+	private	info_string18
+info_string18:
+	db	"start",000o
+	section	.debug_str_offsets,"",@progbits
+	dd	info_string0
+	dd	info_string1
+	dd	info_string2
+	dd	info_string3
+	dd	info_string4
+	dd	info_string5
+	dd	info_string6
+	dd	info_string7
+	dd	info_string8
+	dd	info_string9
+	dd	info_string10
+	dd	info_string11
+	dd	info_string12
+	dd	info_string13
+	dd	info_string14
+	dd	info_string15
+	dd	info_string16
+	dd	info_string17
+	dd	info_string18
+	section	.debug_addr,"",@progbits
+	dd	debug_addr_end0-debug_addr_start0
+	private	debug_addr_start0
+debug_addr_start0:
+	dw	5
+	db	3
+	db	0
+	private	addr_table_base0
+addr_table_base0:
+	dl	func_begin0
+	dl	tmp0
+	dl	tmp3
+	dl	tmp7
+	private	debug_addr_end0
+debug_addr_end0:
 	ident	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)"
+	section	.debug_line,"",@progbits
+line_table_start0:
+	extern	__ZN10GameScreen5setupEv
+	extern	_memset
+	extern	__ZTV10MainScreen
 	extern	__ZN10MainScreen4drawEv
-	extern	__Unwind_SjLj_Register
 	extern	__ZN10MainScreen5setupEv
 	extern	__frameset
+	extern	__Unwind_SjLj_Register
 	extern	__Unwind_SjLj_Unregister
-	extern	__ZN6Screen4drawEv
-	extern	__ZN6Screen5setupEv
+	extern	__ZN10GameScreen4drawEv
+	extern	__ZTV10GameScreen

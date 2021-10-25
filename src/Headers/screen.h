@@ -2,6 +2,7 @@
 
 class Screen {
    public:
-    void setup();
-    void draw();
+    virtual void setup();
+    virtual void draw();
+    bool isRunning;
 };

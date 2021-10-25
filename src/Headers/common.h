@@ -1,7 +1,16 @@
 #pragma once
+// Player = 1, box = 2 , wall = 3 , goal = 4
+
+enum Entitytypes {
+    empty,
+    player,
+    box,
+    wall,
+    goal
+};
 struct Vector2 {
-    int x;
-    int y;
+    int x = 0;
+    int y = 0;
 };
 class Object {
    public:

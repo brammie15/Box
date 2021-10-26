@@ -15,6 +15,7 @@ const uint8_t boxAmount = 2;
 
 bool checkGoals(Object goal, Object box[boxAmount]) {
     //return (goal.pos.x == box[]pos.x && goal.pos.y == box->pos.y);
+    //this fucntion causes a mem leak... don't use it
 }
 void loadLevel(Entitytypes level[5][5], Object &_playerObj, Object boxes[2], Object &_goalObj, Entitytypes board[5][5]) {
     for (uint8_t x = 0; x < 5; x++) {
